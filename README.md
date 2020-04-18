@@ -12,12 +12,12 @@ Variables
 
 Set the following variable in site.yml
 
-* rocket_url: **rocket server fdqn**
+* **rocket_url:** rocket server fdqn
 
 You will be prompted for the following:
 
-* admin_password: **admin password for rocketchat server**
-* letsencrypt_email: **email address needed for letsencrypt**
+* **admin_password:** admin password for rocketchat server
+* **letsencrypt_email: email address needed for letsencrypt
 
 Running the playbook
 ------------
