@@ -12,12 +12,12 @@ Variables
 
 Set the following variable in site.yml
 
-rocket_url: <rocket server fdqn>
+* rocket_url: **rocket server fdqn**
 
 You will be prompted for the following:
 
-admin_password: <admin password for rocketchat server>
-letsencrypt_email: <email address needed for letsencrypt>
+* admin_password: **admin password for rocketchat server**
+* letsencrypt_email: **email address needed for letsencrypt**
 
 Running the playbook
 ------------
@@ -33,4 +33,4 @@ ansible-playbook -i 34.243.192.128, site.yml -u centos
 Disable email validation for new users
 ------------
 
-Log in with admin credentials. In the left-hand pane, press the 3 dots and then administration. Then *accounts* -> *registration* and untick *Accounts_Verify_Email_For_External_Accounts*
+Log in with admin credentials. In the left-hand pane, press the 3 dots and then administration. Then **accounts** -> **registration** and untick **Accounts_Verify_Email_For_External_Accounts**
