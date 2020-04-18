@@ -7,6 +7,8 @@ Pre-reqs
 Fresh CentOS 7 server
 FQDN for rocketserver in DNS
 
+I tested this in AWS with Centos7 marketplace image and route53 dns.
+
 Variables
 ------------
 
