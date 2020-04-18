@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  vars:
+    rocket_url: rocket.example.com
+  vars_prompt:
+    - name: admin_password
+      prompt: "admin password"
+      private: yes
+    - name: letsencrypt_email
+      prompt: "email for letsencrypt cert"
+      private: no
+  roles:
+    - { role: rocketchat }
+    - { role: rocket_nginx, become: yes }
+

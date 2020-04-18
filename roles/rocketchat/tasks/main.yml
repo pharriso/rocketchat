@@ -1,0 +1,123 @@
+---
+
+- name: selinux permissive
+  selinux:
+    policy: targeted
+    state: permissive
+  become: yes
+
+- name: setup mongo repo
+  yum_repository:
+    file: mongodb-org-4.0
+    name: mongodb-org-4.0
+    description: MongoDB Repository
+    baseurl: https://repo.mongodb.org/yum/redhat/7/mongodb-org/4.0/x86_64/
+    gpgcheck: yes
+    gpgkey: https://www.mongodb.org/static/pgp/server-4.0.asc
+    enabled: yes
+  become: yes
+
+- name: get node setup script
+  get_url:
+    url: https://rpm.nodesource.com/setup_12.x
+    dest: /root
+    mode: 0755
+  become: yes
+
+- name: execute node setup script
+  shell: /root/setup_12.x
+  become: yes
+
+- name: enable epel
+  yum:
+    name: epel-release
+    state: installed
+  become: yes
+
+- name: install packages
+  yum:
+    state: installed
+    name:
+    - gcc-c++ 
+    - make 
+    - mongodb-org 
+    - nodejs
+    - GraphicsMagick
+    - nodejs
+  become: yes
+
+- name: get rocketchat and unpack
+  unarchive:
+    src: https://releases.rocket.chat/latest/download
+    dest: /home/centos
+    remote_src: yes
+    owner: centos
+
+- name: install npm inherits
+  npm:
+    name: inherits
+    global: yes
+  become: yes
+
+- name: npm build
+  npm:
+    path: /home/centos/bundle/programs/server
+
+- name: move build to /opt/Rocket.Chat
+  copy:
+    src: /home/centos/bundle/
+    dest: /opt/Rocket.Chat
+    remote_src: yes
+  become: yes
+
+- name: create rocket user 
+  user:
+    name: rocketchat
+  become: yes
+
+- name: rocket user to own /opt/Rocket.Chat
+  file:
+    path: /opt/Rocket.Chat
+    state: directory
+    recurse: yes
+    owner: rocketchat
+    group: rocketchat
+  become: yes
+
+- name: template out rocketchat.service file
+  template:
+    src: rocketchat.service.j2
+    dest: /lib/systemd/system/rocketchat.service
+  become: yes
+
+- name: mongod config mmpav1
+  replace:
+    path: /etc/mongod.conf
+    regexp: '#  engine:'
+    replace: '  engine: mmapv1'
+  become: yes
+
+- name: mongod config replication
+  replace:
+    path: /etc/mongod.conf
+    regexp: '^#replication:'
+    replace: 'replication:\n  replSetName: rs01'
+  become: yes
+
+- name: start and enable mongod
+  service:
+    name: mongod
+    state: started
+    enabled: yes
+  become: yes
+
+- name: initiate mongodb
+  shell: mongo --eval "printjson(rs.initiate())"
+  become: yes
+
+- name: start and enable rocketchat
+  service:
+    name: rocketchat
+    state: started
+    enabled: yes
+  become: yes
