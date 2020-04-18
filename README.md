@@ -24,11 +24,7 @@ Running the playbook
 
 Run the playbook as follows. You mght need additional flags to specify ssh user etc
 
-ansible-playbook -i <server name>, site.yml
-
-Example
-
-ansible-playbook -i 34.243.192.128, site.yml -u centos
+ansible-playbook -i rocket.example.com, site.yml -u centos
 
 Disable email validation for new users
 ------------
