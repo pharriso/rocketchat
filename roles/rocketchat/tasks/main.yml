@@ -17,16 +17,22 @@
     enabled: yes
   become: yes
 
-- name: get node setup script
-  get_url:
-    url: https://rpm.nodesource.com/setup_12.x
-    dest: /root
-    mode: 0755
+- name: setup nodesource repo
+  yum:
+    name: https://rpm.nodesource.com/pub_12.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
+    state: installed
   become: yes
+  
+    #- name: get node setup script
+    #get_url:
+    #url: https://rpm.nodesource.com/setup_12.x
+    #dest: /root
+    #mode: 0755
+    #become: yes
 
-- name: execute node setup script
-  shell: /root/setup_12.x
-  become: yes
+    #- name: execute node setup script
+    #shell: /root/setup_12.x
+    #become: yes
 
 - name: enable epel
   yum:
@@ -46,12 +52,18 @@
     - nodejs
   become: yes
 
+- name: check for existing install
+  stat:
+    path: /opt/Rocket.Chat
+  register: rocket_installed
+
 - name: get rocketchat and unpack
   unarchive:
     src: https://releases.rocket.chat/latest/download
     dest: /home/centos
     remote_src: yes
     owner: centos
+  when: not rocket_installed.stat.exists
 
 - name: install npm inherits
   npm:
@@ -62,6 +74,7 @@
 - name: npm build
   npm:
     path: /home/centos/bundle/programs/server
+  when: not rocket_installed.stat.exists
 
 - name: move build to /opt/Rocket.Chat
   copy:
@@ -69,6 +82,7 @@
     dest: /opt/Rocket.Chat
     remote_src: yes
   become: yes
+  when: not rocket_installed.stat.exists
 
 - name: create rocket user 
   user:
@@ -111,8 +125,10 @@
     enabled: yes
   become: yes
 
-- name: initiate mongodb
+- name: initiate mongodb replicaset
   shell: mongo --eval "printjson(rs.initiate())"
+  register: mongo_init
+  changed_when: "'AlreadyInitialized' not in mongo_init.stdout"
   become: yes
 
 - name: start and enable rocketchat

@@ -16,7 +16,8 @@
   register: issue_cert
   until: issue_cert is not failed
   retries: 5
-
+  changed_when: "'Certificate not yet due for renewal' not in issue_cert.stdout"
+  
 - name: copy ssl key and cert in place
   copy:
      remote_src: true
