@@ -27,8 +27,3 @@ Running the playbook
 Run the playbook as follows. You mght need additional flags to specify ssh user etc
 
 ansible-playbook -i rocket.example.com, site.yml -u centos
-
-Disable email validation for new users
-------------
-
-Log in with admin credentials. In the left-hand pane, press the 3 dots and then administration. Then **accounts** -> **registration** and untick **Accounts_Verify_Email_For_External_Accounts**
