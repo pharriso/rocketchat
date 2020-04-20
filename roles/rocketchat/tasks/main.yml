@@ -23,17 +23,6 @@
     state: installed
   become: yes
   
-    #- name: get node setup script
-    #get_url:
-    #url: https://rpm.nodesource.com/setup_12.x
-    #dest: /root
-    #mode: 0755
-    #become: yes
-
-    #- name: execute node setup script
-    #shell: /root/setup_12.x
-    #become: yes
-
 - name: enable epel
   yum:
     name: epel-release
