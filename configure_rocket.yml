@@ -4,7 +4,8 @@
   connection: local
   gather_facts: false
   vars:
-    rocket_url: rocket.pharriso.co.uk
+    rocket_url: rocket.example.com
+    students: 5
   vars_prompt:
     - name: pat_user
       prompt: "PAT user"
@@ -26,4 +27,4 @@
         X-User-Id: "{{ pat_user }}"
         Content-type: "application/json"
       body_format: json
-    loop: "{{ range(1, 100 + 1)| list }}"
+    loop: "{{ range(1, students + 1)| list }}"

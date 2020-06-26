@@ -49,9 +49,9 @@
 - name: get rocketchat and unpack
   unarchive:
     src: https://releases.rocket.chat/latest/download
-    dest: /home/centos
+    dest: "{{ ansible_user_dir }}"
     remote_src: yes
-    owner: centos
+    owner: "{{ ansible_user_id }}"
   when: not rocket_installed.stat.exists
 
 - name: install npm inherits
@@ -62,12 +62,12 @@
 
 - name: npm build
   npm:
-    path: /home/centos/bundle/programs/server
+    path: "{{ ansible_user_dir }}/bundle/programs/server"
   when: not rocket_installed.stat.exists
 
 - name: move build to /opt/Rocket.Chat
   copy:
-    src: /home/centos/bundle/
+    src: "{{ ansible_user_dir }}/bundle/"
     dest: /opt/Rocket.Chat
     remote_src: yes
   become: yes
