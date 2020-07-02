@@ -3,6 +3,7 @@
 - hosts: all
   vars:
     rocket_url: rocket.example.com
+    rocket_version: 3.3.3
   vars_prompt:
     - name: admin_password
       prompt: "admin password"

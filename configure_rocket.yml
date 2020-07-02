@@ -5,7 +5,7 @@
   gather_facts: false
   vars:
     rocket_url: rocket.example.com
-    students: 5
+    students: 17
   vars_prompt:
     - name: pat_user
       prompt: "PAT user"

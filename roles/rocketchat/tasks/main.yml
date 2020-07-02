@@ -48,7 +48,7 @@
 
 - name: get rocketchat and unpack
   unarchive:
-    src: https://releases.rocket.chat/latest/download
+    src: https://releases.rocket.chat/{{ rocket_version }}/download
     dest: "{{ ansible_user_dir }}"
     remote_src: yes
     owner: "{{ ansible_user_id }}"
