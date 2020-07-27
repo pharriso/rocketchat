@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  vars:
+  roles:
+    - { role: rocket_reset_tower, when: redhat_workshop_server }
+    - { role: rocketchat }
+    - { role: rocket_nginx, become: yes, tags: nginx }
+

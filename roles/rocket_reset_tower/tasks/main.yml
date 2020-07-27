@@ -1,0 +1,5 @@
+---
+
+- name: stop tower
+  shell: ansible-tower-service stop
+  become: true

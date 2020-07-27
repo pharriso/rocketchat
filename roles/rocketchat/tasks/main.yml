@@ -11,7 +11,7 @@
     file: mongodb-org-4.0
     name: mongodb-org-4.0
     description: MongoDB Repository
-    baseurl: https://repo.mongodb.org/yum/redhat/7/mongodb-org/4.0/x86_64/
+    baseurl: https://repo.mongodb.org/yum/redhat/8/mongodb-org/4.0/x86_64/
     gpgcheck: yes
     gpgkey: https://www.mongodb.org/static/pgp/server-4.0.asc
     enabled: yes
@@ -19,14 +19,27 @@
 
 - name: setup nodesource repo
   yum:
-    name: https://rpm.nodesource.com/pub_12.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm
+    name: https://rpm.nodesource.com/pub_12.x/el/8/x86_64/nodesource-release-el8-1.noarch.rpm
     state: installed
   become: yes
-  
+
 - name: enable epel
   yum:
-    name: epel-release
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     state: installed
+  become: yes
+
+- name: install python3
+  yum:
+    name: python3
+    state: installed
+  become: yes
+
+- name: install nodejs from nodesource repo
+  yum:
+    state: installed
+    name: nodejs
+    disablerepo: rhel-8-appstream-rhui-rpms,rhui-rhel-8-appstream-rhui-rpms
   become: yes
 
 - name: install packages
@@ -36,9 +49,7 @@
     - gcc-c++ 
     - make 
     - mongodb-org 
-    - nodejs
     - GraphicsMagick
-    - nodejs
   become: yes
 
 - name: check for existing install

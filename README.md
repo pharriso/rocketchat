@@ -4,30 +4,36 @@ Install RocketChat server
 Pre-reqs
 ------------
 
-Fresh CentOS 7 server
+RHEL8 server. You can provision your own or use an ansible workshop server
 FQDN for rocketserver in DNS
-
-I tested this in AWS with Centos7 marketplace image and route53 dns.
 
 Variables
 ------------
 
-Set the following variable in site.yml
+Set the following variable in extra_vars
 
-* **rocket_url:** rocket server fdqn
+* **rocket_url:** rocket server public fqdn
 
-You will be prompted for the following:
+* **admin_password:** if you want it to automatically configure the admin user
 
-* **admin_password:** admin password for rocketchat server
-* **letsencrypt_email:** email address needed for letsencrypt
+* **generate_letsencypt_certs:** set to true if you have provisioned your own instance. Not needed if using a workshop server
+
+* **letsencrypt_email:** needed if you have provisioned your own instance. Not needed if using a workshop server
+
+* **redhat_workshop_server:** set this to false if you have provisioned your own rhel8 server
 
 Running the playbook
 ------------
 
 Run the playbook as follows. You mght need additional flags to specify ssh user etc
 
-ansible-playbook -i rocket.example.com, site.yml -u centos
+example for a workshop environment ...
 
+ansible-playbook -i student1.abcd.rhdemo.io, install_rocket.yml -u student1 -k -e @extra_vars
+
+example for your own instance in ec2 ...
+
+ansible-playbook -i rocket.mydomain.com, install_rocket.yml -u ec2-user --private-key=~/.ssh/id_rsa -e @extra_vars
 
 Configure RocketChat Students
 =========
@@ -40,9 +46,9 @@ Get a PAT token in RocketChat. Log in as the admin user, click on the "A" icon i
 Variables
 ------------
 
-Set the following variable in configure_rocket.yml
+Set the following variable in extra_vars
 
-* **rocket_url:** rocket server fdqn
+* **rocket_url:** rocket server public fdqn
 
 You will be prompted for the following:
 
@@ -53,4 +59,4 @@ You will be prompted for the following:
 Running the playbook
 ------------
 
-ansible-playbook configure_rocket.yml
+ansible-playbook configure_rocket.yml -e @extra_vars
