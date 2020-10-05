@@ -41,7 +41,7 @@ Configure RocketChat Students
 Pre-reqs
 ------------
 
-Get a PAT token in RocketChat. Log in as the admin user, click on the "A" icon in the top left corner, "My Account" and then "Personal Access Token". Generate a new token and copy the user and token. 
+Get a PAT token in RocketChat. Log in as the admin user, click on the "A" icon in the top left corner, "My Account" and then "Personal Access Token". Set authentication to ignore two factor authentication. Generate a new token and copy the user and token. 
 
 Variables
 ------------
@@ -49,6 +49,8 @@ Variables
 Set the following variable in extra_vars
 
 * **rocket_url:** rocket server public fdqn
+* **students:** number of students to configure
+
 
 You will be prompted for the following:
 
@@ -60,3 +62,10 @@ Running the playbook
 ------------
 
 ansible-playbook configure_rocket.yml -e @extra_vars
+
+Setting friendly names in RocketChat
+------------
+
+This is completely optional - if you want to set the display for users to real names then as the admin user, go to "Options", "Administration", "Layout", "User Interface" and select "Use Real Name".
+
+
