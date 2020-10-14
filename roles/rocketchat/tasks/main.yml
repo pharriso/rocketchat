@@ -21,6 +21,7 @@
   yum:
     name: https://rpm.nodesource.com/pub_12.x/el/8/x86_64/nodesource-release-el8-1.noarch.rpm
     state: installed
+    disable_gpg_check: yes
   become: yes
 
 - name: enable epel
