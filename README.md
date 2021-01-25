@@ -22,18 +22,24 @@ Set the following variable in extra_vars
 
 * **redhat_workshop_server:** set this to false if you have provisioned your own rhel8 server
 
+
 Running the playbook
 ------------
 
-Run the playbook as follows. You mght need additional flags to specify ssh user etc
+
+Change any occurences of 'ABCD' to the actual provisioned details when using RHPDS.
+
+
+Run the playbook as follows. You might need additional flags to specify ssh user etc
 
 example for a workshop environment ...
 
-ansible-playbook -i student1.abcd.rhdemo.io, install_rocket.yml -u student1 -k -e @extra_vars
+ansible-playbook -i student1.ABCD.open.redhat.com, install_rocket.yml -u student1 -k -e @extra_vars
 
 example for your own instance in ec2 ...
 
 ansible-playbook -i rocket.mydomain.com, install_rocket.yml -u ec2-user --private-key=~/.ssh/id_rsa -e @extra_vars
+
 
 Configure RocketChat Students
 =========
@@ -41,7 +47,7 @@ Configure RocketChat Students
 Pre-reqs
 ------------
 
-Get a PAT token in RocketChat. Log in as the admin user, click on the "A" icon in the top left corner, "My Account" and then "Personal Access Token". Set authentication to ignore two factor authentication. Generate a new token and copy the user and token. 
+Get a PAT token in RocketChat. Log in as the admin user, click on the "A" icon in the top left corner, "My Account" and then "Personal Access Token". Set authentication to ignore two factor authentication and call it 'workshop'. Generate a new token and copy the user and token. 
 
 Variables
 ------------
