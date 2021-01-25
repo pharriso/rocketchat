@@ -1,5 +1,5 @@
 # external hostname of rocket instance. If an ansible student environment then this will be something like student2.abcd.rhdemo.io
-rocket_url: student2.aa3c.rhdemo.io
+rocket_url: student2.ABCD.open.redhat.com
 rocket_version: 3.3.3
 admin_password: 
 # if you want to generate letsencrypt certs then set this to true. Not needed if using an ansible workshop server
