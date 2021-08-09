@@ -19,7 +19,3 @@ provisioner:
 verifier:
   name: ansible
 lint: ansible-lint 
-scenario:
-  test_sequence:
-    - lint
-    - syntax
