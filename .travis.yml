@@ -3,6 +3,7 @@ sudo: required
 language: python
 dist: focal
 install:
+  - sudo apt-get -y update
   - sudo apt-get -y install podman
   - python3 -m pip install molecule[podman]
   - python3 -m pip install ansible==2.9.24
