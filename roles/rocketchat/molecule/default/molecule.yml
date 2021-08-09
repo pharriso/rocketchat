@@ -1,0 +1,25 @@
+
+---
+dependency:
+  name: galaxy
+driver:
+  name: podman
+platforms:
+  - name: rhel8
+    image: registry.access.redhat.com/ubi8/ubi-init:latest
+    pre_build_image: true
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+    privileged: false
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
+lint: ansible-lint 
+scenario:
+  test_sequence:
+    - lint
+    - syntax
