@@ -14,5 +14,5 @@ jobs:
           python3 -m pip install ansible==2.9.24
       - name: run molecule
         run: |
-          cd roles/rocketchat
+          cd roles/rocket_nginx
           molecule test

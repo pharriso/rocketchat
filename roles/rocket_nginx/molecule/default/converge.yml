@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include Rocketchat Nginx"
+      include_role:
+        name: "rocket_nginx"
