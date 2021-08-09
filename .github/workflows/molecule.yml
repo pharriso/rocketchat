@@ -4,9 +4,15 @@ jobs:
   ansible-molecule:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt-get -y update
-      - run: sudo apt-get -y install podman
-      - run: python3 -m pip install molecule[podman] 
-      - run: python3 -m pip install ansible==2.9.24
-      - run: cd roles/rocketchat
-      - run: molecule test
+      - name: check out the code
+        uses: actions/checkout@v2
+
+      - name: configure molecule
+        - run: sudo apt-get -y update
+        - run: sudo apt-get -y install podman
+        - run: python3 -m pip install molecule[podman] 
+        - run: python3 -m pip install ansible==2.9.24
+
+      - name: run molecule
+        - run: cd roles/rocketchat
+        - run: molecule test
