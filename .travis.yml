@@ -2,7 +2,7 @@
 sudo: required
 language: python
 services:
-  - docker
+  - podman
 install:
   - python3 -m pip install molecule[podman]
   - python3 -m pip install ansible==2.9.24
