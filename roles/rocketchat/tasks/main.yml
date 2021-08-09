@@ -103,6 +103,9 @@
   template:
     src: rocketchat.service.j2
     dest: /lib/systemd/system/rocketchat.service
+    mode: 0644
+    owner: root
+    group: root
   become: yes
 
 - name: mongod config mmpav1
@@ -127,7 +130,7 @@
   become: yes
 
 - name: initiate mongodb replicaset
-  shell: mongo --eval "printjson(rs.initiate())"
+  command: mongo --eval "printjson(rs.initiate())"
   register: mongo_init
   changed_when: "'AlreadyInitialized' not in mongo_init.stdout"
   become: yes
