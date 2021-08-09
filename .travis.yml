@@ -1,6 +1,7 @@
 ---
 sudo: required
 language: python
+dist: focal
 install:
   - sudo apt-get -y install podman
   - python3 -m pip install molecule[podman]
