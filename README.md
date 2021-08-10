@@ -69,7 +69,7 @@ You will be prompted for the following:
 * **pat_token:** PAT token you generated in pre-req step
 * **student_password:** Password to assign to student login. Worth setting this to the same password as the Ansible Labs
 
-Running the playbook
+Running the playbook 
 ------------
 
 ansible-playbook configure_rocket.yml -e @extra_vars
