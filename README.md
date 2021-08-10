@@ -41,11 +41,6 @@ example for your own instance in ec2 ...
 ansible-playbook -i rocket.mydomain.com, install_rocket.yml -u ec2-user --private-key=~/.ssh/id_rsa -e @extra_vars
 
 
-RocketChat install wizard
-=========
-
-The first time you log into RocketChat as the admin user it will take you to a setup wizard. The **only** setting you need to change is around 2-factor auth. Set this to disabled. All other fields can be left as defaults or blank.
-
 Configure RocketChat Students
 =========
 
@@ -73,8 +68,3 @@ Running the playbook
 ------------
 
 ansible-playbook configure_rocket.yml -e @extra_vars
-
-Setting friendly names in RocketChat
-------------
-
-This is completely optional - if you want to set the display for users to real names then as the admin user, go to "Options", "Administration", "Layout", "User Interface" and select "Use Real Name".
