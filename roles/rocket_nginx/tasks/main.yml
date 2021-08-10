@@ -33,7 +33,6 @@
     - { "src_file": "fullchain.pem", "dest_file": "/etc/nginx/certificate.crt" }
     - { "src_file": "privkey.pem", "dest_file": "/etc/nginx/certificate.key" }
   when:
-    - generate_letsencypt_certs
     - manage_certs
 
 - name: template out ngnix config

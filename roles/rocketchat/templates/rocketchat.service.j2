@@ -7,6 +7,6 @@ StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=rocketchat
 User=rocketchat
-Environment=MONGO_URL=mongodb://localhost:27017/rocketchat?replicaSet=rs01 MONGO_OPLOG_URL=mongodb://localhost:27017/local?replicaSet=rs01 ROOT_URL=http://{{ rocket_url }}:3000/ PORT=3000 ADMIN_USERNAME=admin ADMIN_PASS={{ admin_password }} ADMIN_EMAIL=admin@localhost
+Environment=MONGO_URL=mongodb://localhost:27017/rocketchat?replicaSet=rs01 MONGO_OPLOG_URL=mongodb://localhost:27017/local?replicaSet=rs01 ROOT_URL=http://{{ rocket_url }}:3000/ PORT=3000 ADMIN_USERNAME=admin ADMIN_PASS={{ admin_password }} ADMIN_EMAIL=admin@localhost OVERWRITE_SETTING_Accounts_TwoFactorAuthentication_By_Email_Enabled=false OVERWRITE_SETTING_Show_Setup_Wizard=completed OVERWRITE_SETTING_UI_Use_Real_Name=true
 [Install]
 WantedBy=multi-user.target

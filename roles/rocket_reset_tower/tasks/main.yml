@@ -1,5 +1,11 @@
 ---
 
+- name: gather service facts
+  service_facts:
+
 - name: stop tower
-  shell: ansible-tower-service stop
+  service: 
+    name: ansible-tower.service
+    state: stopped
   become: true
+  when: '"ansible-tower.service" in ansible_facts.services'

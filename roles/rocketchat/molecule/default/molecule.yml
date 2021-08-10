@@ -16,6 +16,11 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
+  inventory:
+    group_vars:
+      all:
+        rocket_url: rocket.example.com
+
 verifier:
   name: ansible
 lint: ansible-lint 

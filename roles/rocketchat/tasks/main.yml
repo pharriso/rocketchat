@@ -5,6 +5,9 @@
     policy: targeted
     state: permissive
   become: yes
+  when: 
+    - ansible_selinux.mode is defined
+    - ansible_selinux.mode == 'enforcing'
 
 - name: setup mongo repo
   yum_repository:
@@ -28,6 +31,7 @@
   yum:
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     state: installed
+    disable_gpg_check: yes
   become: yes
 
 - name: install python3
@@ -40,7 +44,7 @@
   yum:
     state: installed
     name: nodejs
-    disablerepo: rhel-8-appstream-rhui-rpms,rhui-rhel-8-appstream-rhui-rpms
+    disablerepo: rhel-8*,ubi-8*
   become: yes
 
 - name: install packages
