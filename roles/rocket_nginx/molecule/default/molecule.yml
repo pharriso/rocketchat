@@ -1,4 +1,3 @@
-
 ---
 dependency:
   name: galaxy
@@ -7,13 +6,13 @@ driver:
 platforms:
   - name: rhel8
     image: registry.access.redhat.com/ubi8/ubi-init:latest
-    command: /sbin/init
+    command: /usr/sbin/init
     capabilities:
       - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     pre_build_image: true
-    privileged: false
+    privileged: true
 provisioner:
   name: ansible
   inventory:
