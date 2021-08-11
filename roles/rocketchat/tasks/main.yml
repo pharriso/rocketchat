@@ -86,6 +86,7 @@
     src: "{{ ansible_user_dir }}/bundle/"
     dest: /opt/Rocket.Chat
     remote_src: yes
+    mode: preserve
   become: yes
   when: not rocket_installed.stat.exists
 
