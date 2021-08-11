@@ -13,5 +13,4 @@ jobs:
           python3 -m pip install ansible==2.9.24
       - name: run molecule
         run: |
-          cd roles/rocket_nginx
-          molecule test
+          for i in $(ls -d roles/*/) ; do cd $i ; molecule test ; cd ../.. ; done

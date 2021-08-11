@@ -1,21 +1,26 @@
-
 ---
 dependency:
   name: galaxy
 driver:
-  name: podman
+  name: docker
 platforms:
   - name: rhel8
     image: registry.access.redhat.com/ubi8/ubi-init:latest
-    pre_build_image: true
-    command: /sbin/init
+    command: /usr/sbin/init
     capabilities:
       - SYS_ADMIN
-    privileged: false
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    pre_build_image: true
+    privileged: true
 provisioner:
   name: ansible
+  inventory:
+    group_vars:
+      all:
+        manage_certs: false
+        generate_letsencypt_certs: false
+        rocket_url: rocket.example.com
 verifier:
   name: ansible
 lint: ansible-lint 
