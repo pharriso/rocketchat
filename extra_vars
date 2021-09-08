@@ -2,7 +2,7 @@
 # admin password
 admin_password:
 # number of students to create
-students: 100
+students: 10
 
 # optional variables
 # external hostname of rocket instance

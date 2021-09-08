@@ -37,8 +37,12 @@ Run the playbook as follows. You might need additional parameters to specify ssh
 
 example for a workshop server ...
 
+```bash
 ansible-playbook -i student1.ABCD.open.redhat.com, install_rocket.yml -u student1 -k -e @extra_vars
+```
 
 example for your own instance in ec2 ...
 
+```bash
 ansible-playbook -i rocket.mydomain.com, install_rocket.yml -u ec2-user --private-key=~/.ssh/id_rsa -e @extra_vars
+```
