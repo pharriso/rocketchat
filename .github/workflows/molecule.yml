@@ -16,5 +16,5 @@ jobs:
           for i in $(ls -d roles/*/) ; do cd $i ; molecule test ; cd ../.. ; done
       - name: run molecule against playbook
         run: |
-          cd
+          cd $GITHUB_WORKSPACE
           molecule test
