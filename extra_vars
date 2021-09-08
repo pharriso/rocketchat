@@ -14,5 +14,3 @@ generate_letsencypt_certs: false
 manage_certs: true
 # if you want to generate letsencrypt certs then enter your email address. Not needed if using an ansible workshop server
 letsencrypt_email: 
-# if using an ansible workshop student station then set the following to true
-redhat_workshop_server: true

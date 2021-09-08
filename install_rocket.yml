@@ -3,7 +3,7 @@
 - name: install rocketchat
   hosts: all
   roles:
-    - { role: rocket_reset_tower, when: redhat_workshop_server }
+    - { role: rocket_reset_tower }
     - { role: rocketchat }
     - { role: rocket_nginx, become: yes, tags: nginx }
 
