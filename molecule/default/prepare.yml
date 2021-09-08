@@ -2,12 +2,6 @@
 - name: Prepare
   hosts: all
   tasks:
-    - name: add entry to hosts file
-      copy:
-        dest: /etc/hosts
-        content: "127.0.0.1   localhost {{ inventory_hostname }}"
-        mode: 0644
-
     - name: ensure sudo is installed
       yum:
         name: sudo
