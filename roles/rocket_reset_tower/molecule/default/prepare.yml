@@ -1,8 +1,0 @@
----
-- name: Prepare
-  hosts: all
-  tasks:
-    - name: ensure sudo is installed
-      yum:
-        name: sudo
-        state: present

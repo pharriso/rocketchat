@@ -1,9 +1,13 @@
 ---
 
-- hosts: all
-  vars:
+- name: install rocketchat
+  hosts: all
   roles:
     - { role: rocket_reset_tower, when: redhat_workshop_server }
     - { role: rocketchat }
     - { role: rocket_nginx, become: yes, tags: nginx }
 
+- name: add rocket users
+  hosts: all
+  roles:
+    - { role: add_rocket_users, tags: add_rocket_users }

@@ -1,0 +1,27 @@
+---
+
+- name: get auth token
+  uri:
+    url: https://{{ rocket_url }}/api/v1/login
+    method: POST
+    body: '{ "user": "admin", "password": "{{ admin_password }}" }'
+    headers: 
+      Content-type: "application/json"
+    body_format: json
+  register: rocket_auth_token
+  until: rocket_auth_token is not failed
+  retries: 5
+  delay: 10
+
+
+- name: add users
+  uri:
+    url: https://{{ rocket_url }}/api/v1/users.create
+    method: POST
+    body: '{"name": "student{{ item }}", "email": "student{{ item }}@localhost.com", "password": "{{ admin_password }}", "username": "student{{ item }}"}'
+    headers: 
+      X-Auth-Token: "{{ rocket_auth_token.json.data.authToken }}"
+      X-User-Id: "{{ rocket_auth_token.json.data.userId }}"
+      Content-type: "application/json"
+    body_format: json
+  loop: "{{ range(1, students + 1)| list }}"

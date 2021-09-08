@@ -1,12 +1,18 @@
-# external hostname of rocket instance. If an ansible student environment then this will be something like student2.abcd.rhdemo.io
-rocket_url: student2.ABCD.open.redhat.com
-rocket_version: 3.3.3
-admin_password: 
+# mandatory variables
+# admin password
+admin_password: VUeGGy8jqQfM10
+# number of students to create
+students: 100
+
+# optional variables
+# external hostname of rocket instance
+rocket_url: "{{ inventory_hostname }}"
+student_password: "{{ admin_password }}"
 # if you want to generate letsencrypt certs then set this to true. Not needed if using an ansible workshop server
 generate_letsencypt_certs: false
+# if you don't want it to manage certs at all set this to false
+manage_certs: true
 # if you want to generate letsencrypt certs then enter your email address. Not needed if using an ansible workshop server
 letsencrypt_email: 
 # if using an ansible workshop student station then set the following to true
 redhat_workshop_server: true
-# number of students to create
-students: 50

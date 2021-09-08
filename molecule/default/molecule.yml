@@ -23,4 +23,19 @@ provisioner:
         students: 1
 verifier:
   name: ansible
-lint: ansible-lint 
+lint: ansible-lint
+scenario:
+  name: default
+  test_sequence:
+    - dependency
+    - lint
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - cleanup
+    - destroy
