@@ -20,6 +20,7 @@ provisioner:
       all:
         generate_letsencypt_certs: false
         generate_self_signed_certs: true
+        use_workshop_certs: false
         students: 10
         admin_password: R0cket!
         student_password: "{{ admin_password }}"
