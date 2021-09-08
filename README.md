@@ -25,7 +25,7 @@ Edit the following variables in extra_vars.
 
 | Name                      | Default value         |                                                                                  |
 |---------------------------|-----------------------|----------------------------------------------------------------------------------|
-| rocket_url                | {{ inventory_hostname }} | FQDN of RocketChat server                                           |
+| rocket_url                | inventory_hostname    | FQDN of RocketChat server                                                        |
 | generate_letsencypt_certs | false                 | Whether to generate certificates. Not needed if using a workshop server.         |
 | letsencrypt_emai          |                       | Email address for letsencrypt. Not needed if using a workshop server.            |
 | redhat_workshop_server    | true                  | set this to false if you have provisioned your own server.                       |
@@ -33,7 +33,7 @@ Edit the following variables in extra_vars.
 Running the playbook
 ------------
 
-Run the playbook as follows. You might need additional flags to specify ssh user etc
+Run the playbook as follows. You might need additional parameters to specify ssh user etc
 
 example for a workshop server ...
 

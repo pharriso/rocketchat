@@ -1,7 +1,8 @@
 ---
 - name: Converge
   hosts: all
+  connection: local
   tasks:
-    - name: "Include Rocketchat"
-      include_role:
-        name: "rocketchat"
+    - name: "Skip converge"
+      debug:
+        msg: "Only lint and syntax check this role"

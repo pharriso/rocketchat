@@ -2,25 +2,17 @@
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: delegated
 platforms:
-  - name: rhel8
-    image: registry.access.redhat.com/ubi8/ubi-init:latest
-    command: /usr/sbin/init
-    capabilities:
-      - SYS_ADMIN
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    pre_build_image: true
-    privileged: true
+  - name: instance
 provisioner:
   name: ansible
-  inventory:
-    group_vars:
-      all:
-        manage_certs: false
-        generate_letsencypt_certs: false
-        students: 1
 verifier:
   name: ansible
-lint: ansible-lint 
+lint: |
+  ansible-lint --exclude molecule/default/
+scenario:
+  name: default
+  test_sequence:
+    - lint
+    - syntax
