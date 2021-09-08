@@ -12,11 +12,12 @@ jobs:
           python3 -m venv ~/ansible_molecule
           ~/ansible_molecule/bin/pip3 install pip --upgrade
           ~/ansible_molecule/bin/pip3 install molecule[docker] molecule[docker] cryptography
-          source ~/ansible_molecule/bin/activate
       - name: run molecule against roles
         run: |
+          source ~/ansible_molecule/bin/activate
           for i in $(ls -d roles/*/) ; do cd $i ; molecule test ; cd ../.. ; done
       - name: run molecule against playbook
         run: |
+          source ~/ansible_molecule/bin/activate
           cd $GITHUB_WORKSPACE
           molecule test
