@@ -8,6 +8,7 @@
     headers: 
       Content-type: "application/json"
     body_format: json
+    validate_certs: "{{ rocket_validate_certs | default('true') }}"
   register: rocket_auth_token
   until: rocket_auth_token is not failed
   retries: 5
@@ -24,4 +25,5 @@
       X-User-Id: "{{ rocket_auth_token.json.data.userId }}"
       Content-type: "application/json"
     body_format: json
+    validate_certs: "{{ rocket_validate_certs | default('true') }}"
   loop: "{{ range(1, students + 1)| list }}"

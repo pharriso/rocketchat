@@ -24,6 +24,7 @@ provisioner:
         admin_password: R0cket!
         student_password: "{{ admin_password }}"
         rocket_url: "{{ inventory_hostname }}"
+        rocket_validate_certs: false
 verifier:
   name: ansible
 lint: ansible-lint
