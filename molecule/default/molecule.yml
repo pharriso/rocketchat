@@ -18,8 +18,8 @@ provisioner:
   inventory:
     group_vars:
       all:
-        manage_certs: false
         generate_letsencypt_certs: false
+        generate_self_signed_certs: true
         students: 10
         admin_password: R0cket!
         student_password: "{{ admin_password }}"
