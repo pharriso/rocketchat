@@ -10,6 +10,7 @@ jobs:
         run: | 
           sudo apt-get -y update
           python3 -m venv ~/ansible_molecule
+          ~/ansible_molecule/bin/pip3 install pip --upgrade
           ~/ansible_molecule/bin/pip3 install molecule[docker] molecule[docker] cryptography
           source ~/ansible_molecule/bin/activate
       - name: run molecule against roles
