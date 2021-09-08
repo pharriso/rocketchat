@@ -20,7 +20,8 @@ provisioner:
       all:
         manage_certs: false
         generate_letsencypt_certs: false
-        students: 1
+        students: 10
+        admin_password: R0cket!
 verifier:
   name: ansible
 lint: ansible-lint
