@@ -22,6 +22,8 @@ provisioner:
         generate_letsencypt_certs: false
         students: 10
         admin_password: R0cket!
+        student_password: "{{ admin_password }}"
+        rocket_url: "{{ inventory_hostname }}"
 verifier:
   name: ansible
 lint: ansible-lint
