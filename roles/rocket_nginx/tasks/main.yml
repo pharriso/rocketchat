@@ -31,8 +31,7 @@
   loop:
     - { "src_file": "fullchain.pem", "dest_file": "/etc/nginx/certificate.crt" }
     - { "src_file": "privkey.pem", "dest_file": "/etc/nginx/certificate.key" }
-  when:
-    - generate_letsencypt_certs
+  when: generate_letsencypt_certs or use_workshop_certs
 
 - name: install python3-pyOpenSSL
   yum:
