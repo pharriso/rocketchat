@@ -1,7 +1,5 @@
 name: molecule
 on: [push]
-  paths-ignore:
-    - README.md
 jobs:
   ansible-molecule:
     runs-on: ubuntu-latest
