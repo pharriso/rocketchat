@@ -1,0 +1,46 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: rhel8
+    image: registry.access.redhat.com/ubi8/ubi-init:latest
+    command: /usr/sbin/init
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    pre_build_image: true
+    privileged: true
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        generate_letsencypt_certs: false
+        generate_self_signed_certs: true
+        use_workshop_certs: false
+        students: 10
+        admin_password: R0cket!
+        student_password: "{{ admin_password }}"
+        rocket_url: "{{ inventory_hostname }}"
+        rocket_validate_certs: false
+verifier:
+  name: ansible
+lint: ansible-lint
+scenario:
+  name: default
+  test_sequence:
+    - dependency
+    - lint
+    - cleanup
+    - destroy
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - cleanup
+    - destroy

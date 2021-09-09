@@ -1,0 +1,6 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+- name: import play
+  import_playbook: ../../install_rocket.yml
