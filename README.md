@@ -16,6 +16,7 @@ Edit the following variables in extra_vars.
 | Name                      | Default value         |                                                                                  |
 |---------------------------|-----------------------|----------------------------------------------------------------------------------|
 | admin_password            | R0cket!               | **REQUIRED** Admin password.                                                     |
+| students                  | 10                    | **REQUIRED** Number of students                                                  |
 
 
 Optional Variables
@@ -26,8 +27,11 @@ Edit the following variables in extra_vars.
 | Name                      | Default value         |                                                                                  |
 |---------------------------|-----------------------|----------------------------------------------------------------------------------|
 | rocket_url                | inventory_hostname    | FQDN of RocketChat server                                                        |
+| student_password          | admin_password        | Password to use for students. Defaults to the same password used by admin.       |
+| use_workshop_certs        | true                  | Use the existing certificates used by Ansible Tower if using a workshop server.  |
 | generate_letsencypt_certs | false                 | Whether to generate certificates. Not needed if using a workshop server.         |
 | letsencrypt_emai          |                       | Email address for letsencrypt. Not needed if using a workshop server.            |
+| generate_self_signed_certs| false                 | Generate self-signed certs.                                                      |
 | redhat_workshop_server    | true                  | set this to false if you have provisioned your own server.                       |
 
 Running the playbook

@@ -1,5 +1,10 @@
 name: molecule
-on: [push]
+on:
+  push:
+    branches-ignore:
+      - master
+    paths-ignore:
+      - README.md
 jobs:
   ansible-molecule:
     runs-on: ubuntu-latest
