@@ -1,5 +1,12 @@
 ---
 
+- name: check if the admin_password is set
+  assert:
+    that:
+      - admin_password is defined
+      - admin_password is not none
+    fail_msg: "admin_password can't be empty. Read the README.md"
+
 - name: selinux permissive
   selinux:
     policy: targeted
