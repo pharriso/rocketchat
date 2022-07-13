@@ -27,13 +27,6 @@
     enabled: true
   become: true
 
-- name: setup nodesource repo
-  ansible.builtin.yum:
-    name: https://rpm.nodesource.com/pub_12.x/el/8/x86_64/nodesource-release-el8-1.noarch.rpm
-    state: installed
-    disable_gpg_check: true
-  become: true
-
 - name: enable epel
   ansible.builtin.yum:
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
@@ -47,17 +40,17 @@
     state: installed
   become: true
 
-- name: install nodejs from nodesource repo
-  ansible.builtin.yum:
-    state: installed
-    name: nodejs
-    disablerepo: rhel-8*,ubi-8*
+- name: enable nodejs module
+  ansible.builtin.dnf:
+    name: '@nodejs:14'
+    state: present
   become: true
 
 - name: install packages
   ansible.builtin.yum:
     state: installed
     name:
+      - nodejs
       - gcc-c++
       - make
       - mongodb-org

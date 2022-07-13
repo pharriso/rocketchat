@@ -9,3 +9,4 @@
     state: stopped
   become: true
   when: '"automation-controller.service" in ansible_facts.services'
+  ignore_errors: true
