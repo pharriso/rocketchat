@@ -55,7 +55,7 @@
     - generate_self_signed_certs
 
 - name: create self-signed cert
-  community.crypto.openssl_certificate:
+  community.crypto.x509_certificate:
     provider: selfsigned
     path: /etc/nginx/certificate.crt
     privatekey_path: /etc/nginx/certificate.key
