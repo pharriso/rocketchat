@@ -7,6 +7,8 @@ Requirements
 ------------
 
 * A pre-deployed RHEL8 or CentOS8 server. You can provision your own instance or use one of the student environments from the Ansible Workshop.
+* ansible-core 2.13
+* Install collections listed in collections/requirements.yml
 
 Required Variables
 ------------
@@ -36,6 +38,12 @@ Edit the following variables in extra_vars.
 
 Running the playbook
 ------------
+
+Make sure you install the collections:
+
+```bash
+ansible-galaxy collection install -r collections/requirements.yml --force
+```
 
 Run the playbook as follows. You might need additional parameters to specify ssh user etc
 
