@@ -1,6 +1,6 @@
 # mandatory variables
 # admin password
-admin_password: 6BJr3R3CYRzBeV
+admin_password:
 # number of students to create
 students: 10
 
