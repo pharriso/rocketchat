@@ -3,7 +3,7 @@
   hosts: all
   tasks:
   - name: try logging in as a student
-    uri:
+    ansible.builtin.uri:
       url: https://{{ rocket_url }}/api/v1/login
       method: POST
       body: '{ "user": "student1", "password": "{{ student_password }}" }'
