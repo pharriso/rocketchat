@@ -7,7 +7,7 @@
       url: https://{{ rocket_url }}/api/v1/login
       method: POST
       body: '{ "user": "student1", "password": "{{ student_password }}" }'
-      headers: 
+      headers:
         Content-type: "application/json"
       body_format: json
       validate_certs: "{{ rocket_validate_certs | default('true') }}"

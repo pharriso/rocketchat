@@ -28,7 +28,7 @@ provisioner:
         rocket_validate_certs: false
 verifier:
   name: ansible
-lint: ansible-lint
+lint: ansible-lint --exclude molecule/default/ --exclude collections/
 scenario:
   name: default
   test_sequence:
