@@ -1,11 +1,11 @@
 ---
 
 - name: gather service facts
-  service_facts:
+  ansible.builtin.service_facts:
 
-- name: stop tower
-  service: 
-    name: ansible-tower.service
+- name: stop automation controller
+  ansible.builtin.service:
+    name: automation-controller.service
     state: stopped
   become: true
-  when: '"ansible-tower.service" in ansible_facts.services'
+  when: '"automation-controller.service" in ansible_facts.services'

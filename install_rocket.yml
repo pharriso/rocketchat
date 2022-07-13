@@ -5,7 +5,7 @@
   roles:
     - { role: rocket_reset_tower }
     - { role: rocketchat }
-    - { role: rocket_nginx, become: yes, tags: nginx }
+    - { role: rocket_nginx, become: true, tags: nginx }
 
 - name: add rocket users
   hosts: all

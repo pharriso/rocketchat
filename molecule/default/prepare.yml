@@ -3,6 +3,6 @@
   hosts: all
   tasks:
     - name: ensure sudo is installed
-      yum:
+      ansible.builtin.yum:
         name: sudo
         state: present

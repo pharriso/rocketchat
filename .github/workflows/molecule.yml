@@ -15,7 +15,8 @@ jobs:
         run: | 
           sudo apt-get -y update
           python3 -m pip install molecule[docker]
-          python3 -m pip install ansible==2.9.24
+          python3 -m pip install ansible-core==2.13.1 ansible-lint==6.3.0
+          ansible-galaxy collection install -r collections/requirements.yml
       - name: run molecule against roles
         run: |
           for i in $(ls -d roles/*/) ; do cd $i ; molecule test ; cd ../.. ; done

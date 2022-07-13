@@ -1,11 +1,11 @@
 ---
 
 - name: get auth token
-  uri:
+  ansible.builtin.uri:
     url: https://{{ rocket_url }}/api/v1/login
     method: POST
     body: '{ "user": "admin", "password": "{{ admin_password }}" }'
-    headers: 
+    headers:
       Content-type: "application/json"
     body_format: json
     validate_certs: "{{ rocket_validate_certs | default('true') }}"
@@ -16,14 +16,14 @@
 
 
 - name: add users
-  uri:
+  ansible.builtin.uri:
     url: https://{{ rocket_url }}/api/v1/users.create
     method: POST
     body: '{"name": "student{{ item }}", "email": "student{{ item }}@localhost.com", "password": "{{ admin_password }}", "username": "student{{ item }}"}'
-    headers: 
+    headers:
       X-Auth-Token: "{{ rocket_auth_token.json.data.authToken }}"
       X-User-Id: "{{ rocket_auth_token.json.data.userId }}"
       Content-type: "application/json"
     body_format: json
     validate_certs: "{{ rocket_validate_certs | default('true') }}"
-  loop: "{{ range(1, students + 1)| list }}"
+  loop: "{{ range(1, students + 1) | list }}"
