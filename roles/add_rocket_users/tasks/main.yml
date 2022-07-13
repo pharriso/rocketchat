@@ -26,4 +26,4 @@
       Content-type: "application/json"
     body_format: json
     validate_certs: "{{ rocket_validate_certs | default('true') }}"
-  loop: "{{ range(1, students + 1)| list }}"
+  loop: "{{ range(1, students + 1) | list }}"
