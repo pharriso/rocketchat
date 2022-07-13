@@ -1,155 +1,155 @@
 ---
 
 - name: check if the admin_password is set
-  assert:
+  ansible.builtin.assert:
     that:
       - admin_password is defined
       - admin_password is not none
     fail_msg: "admin_password can't be empty. Read the README.md"
 
 - name: selinux permissive
-  selinux:
+  ansible.posix.selinux:
     policy: targeted
     state: permissive
-  become: yes
-  when: 
+  become: true
+  when:
     - ansible_selinux.mode is defined
     - ansible_selinux.mode == 'enforcing'
 
 - name: setup mongo repo
-  yum_repository:
+  ansible.builtin.yum_repository:
     file: mongodb-org-4.0
     name: mongodb-org-4.0
     description: MongoDB Repository
     baseurl: https://repo.mongodb.org/yum/redhat/8/mongodb-org/4.0/x86_64/
-    gpgcheck: yes
+    gpgcheck: true
     gpgkey: https://www.mongodb.org/static/pgp/server-4.0.asc
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true
 
 - name: setup nodesource repo
-  yum:
+  ansible.builtin.yum:
     name: https://rpm.nodesource.com/pub_12.x/el/8/x86_64/nodesource-release-el8-1.noarch.rpm
     state: installed
-    disable_gpg_check: yes
-  become: yes
+    disable_gpg_check: true
+  become: true
 
 - name: enable epel
-  yum:
+  ansible.builtin.yum:
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     state: installed
-    disable_gpg_check: yes
-  become: yes
+    disable_gpg_check: true
+  become: true
 
 - name: install python3
-  yum:
+  ansible.builtin.yum:
     name: python3
     state: installed
-  become: yes
+  become: true
 
 - name: install nodejs from nodesource repo
-  yum:
+  ansible.builtin.yum:
     state: installed
     name: nodejs
     disablerepo: rhel-8*,ubi-8*
-  become: yes
+  become: true
 
 - name: install packages
-  yum:
+  ansible.builtin.yum:
     state: installed
     name:
-    - gcc-c++ 
-    - make 
-    - mongodb-org 
-    - GraphicsMagick
-  become: yes
+      - gcc-c++
+      - make
+      - mongodb-org
+      - GraphicsMagick
+  become: true
 
 - name: check for existing install
-  stat:
+  ansible.builtin.stat:
     path: /opt/Rocket.Chat
   register: rocket_installed
 
 - name: get rocketchat and unpack
-  unarchive:
+  ansible.builtin.unarchive:
     src: https://releases.rocket.chat/{{ rocket_version }}/download
     dest: "{{ ansible_user_dir }}"
-    remote_src: yes
+    remote_src: true
     owner: "{{ ansible_user_id }}"
   when: not rocket_installed.stat.exists
 
 - name: install npm inherits
-  npm:
+  community.general.npm:
     name: inherits
-    global: yes
-  become: yes
+    global: true
+  become: true
 
 - name: npm build
-  npm:
+  community.general.npm:
     path: "{{ ansible_user_dir }}/bundle/programs/server"
   when: not rocket_installed.stat.exists
 
 - name: move build to /opt/Rocket.Chat
-  copy:
+  ansible.builtin.copy:
     src: "{{ ansible_user_dir }}/bundle/"
     dest: /opt/Rocket.Chat
-    remote_src: yes
+    remote_src: true
     mode: preserve
-  become: yes
+  become: true
   when: not rocket_installed.stat.exists
 
-- name: create rocket user 
-  user:
+- name: create rocket user
+  ansible.builtin.user:
     name: rocketchat
-  become: yes
+  become: true
 
 - name: rocket user to own /opt/Rocket.Chat
-  file:
+  ansible.builtin.file:
     path: /opt/Rocket.Chat
     state: directory
-    recurse: yes
+    recurse: true
     owner: rocketchat
     group: rocketchat
-  become: yes
+  become: true
 
 - name: template out rocketchat.service file
-  template:
+  ansible.builtin.template:
     src: rocketchat.service.j2
     dest: /lib/systemd/system/rocketchat.service
     mode: 0644
     owner: root
     group: root
-  become: yes
+  become: true
 
 - name: mongod config mmpav1
-  replace:
+  ansible.builtin.replace:
     path: /etc/mongod.conf
     regexp: '#  engine:'
     replace: '  engine: mmapv1'
-  become: yes
+  become: true
 
 - name: mongod config replication
-  replace:
+  ansible.builtin.replace:
     path: /etc/mongod.conf
     regexp: '^#replication:'
     replace: 'replication:\n  replSetName: rs01'
-  become: yes
+  become: true
 
 - name: start and enable mongod
-  service:
+  ansible.builtin.service:
     name: mongod
     state: started
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true
 
 - name: initiate mongodb replicaset
-  command: mongo --eval "printjson(rs.initiate())"
+  ansible.builtin.command: mongo --eval "printjson(rs.initiate())"
   register: mongo_init
   changed_when: "'AlreadyInitialized' not in mongo_init.stdout"
-  become: yes
+  become: true
 
 - name: start and enable rocketchat
-  service:
+  ansible.builtin.service:
     name: rocketchat
     state: started
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true

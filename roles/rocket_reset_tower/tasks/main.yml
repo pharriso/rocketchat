@@ -1,10 +1,10 @@
 ---
 
 - name: gather service facts
-  service_facts:
+  ansible.builtin.service_facts:
 
 - name: stop automation controller
-  service: 
+  ansible.builtin.service:
     name: automation-controller.service
     state: stopped
   become: true
