@@ -50,3 +50,8 @@ example for your own instance in ec2 ...
 ```bash
 ansible-playbook -i rocket.mydomain.com, install_rocket.yml -u ec2-user --private-key=~/.ssh/id_rsa -e @extra_vars
 ```
+
+Logging in
+------------
+
+Once Rocketchat is deployed, you can log in as **root** with whatever password you set to get administrator access. Students can login with their student accounts.
